@@ -1,0 +1,93 @@
+Atlanta, Charleston, 0, 2
+Atlanta, Miami, 5, 5
+Atlanta, Nashville, 0, 1
+Atlanta, New Orleans, 2, 4
+Atlanta, New Orleans, 3, 4
+Atlanta, Raleigh, 0, 2
+Charleston, Miami, 6, 4
+Charleston, Raleigh, 0, 1
+Miami, New Orleans, 1, 6
+Nashville, Little Rock, 7, 3
+Nashville, Pittsburgh, 3, 4
+Nashville, Raleigh, 8, 3
+Nashville, Saint Louis, 0, 2
+New Orleans, Houston, 0, 2
+New Orleans, Little Rock, 4, 3
+Raleigh, Washington DC, 0, 2
+Boston, Montreal, 0, 2
+Boston, Montreal, 0, 2
+Boston, New York, 1, 2
+Boston, New York, 3, 2
+Montreal, New York, 5, 3
+Montreal, Sault St. Marie, 8, 5
+Montreal, Toronto, 0, 3
+New York, Pittsburgh, 4, 2
+New York, Pittsburgh, 7, 2
+New York, Washington DC, 8, 2
+New York, Washington DC, 2, 2
+Calgary, Helena, 0, 4
+Calgary, Helena, 0, 4
+Calgary, Seattle, 0, 4
+Calgary, Vancouver, 0, 3
+Calgary, Winnipeg, 7, 6
+Helena, Denver, 4, 4
+Helena, Duluth, 2, 6
+Helena, Omaha, 1, 5
+Helena, Seattle, 3, 6
+Helena, Winnipeg, 5, 4
+Seattle, Portland, 0, 1
+Seattle, Portland, 0, 1
+Seattle, Vancouver, 0, 1
+Winnipeg, Duluth, 8, 4
+Winnipeg, Sault St. Marie, 0, 6
+Chicago, Duluth, 1, 3
+Chicago, Omaha, 5, 4
+Chicago, Pittsburgh, 8, 3
+Chicago, Pittsburgh, 2, 3
+Chicago, Saint Louis, 4, 2
+Chicago, Saint Louis, 7, 2
+Chicago, Toronto, 7, 4
+Duluth, Omaha, 0, 2
+Duluth, Omaha, 0, 2
+Duluth, Sault St. Marie, 0, 3
+Duluth, Toronto, 6, 6
+Omaha, Denver, 6, 4
+Omaha, Kansas City, 0, 1
+Omaha, Kansas City, 0, 1
+Pittsburgh, Saint Louis, 4, 5
+Saint Louis, Kansas City, 5, 2
+Saint Louis, Kansas City, 6, 2
+Saint Louis, Little Rock, 0, 2
+Toronto, Sault St. Marie, 0, 2
+Dallas, El Paso, 1, 4
+Dallas, Houston, 0, 1
+Dallas, Houston, 0, 1
+Dallas, Little Rock, 0, 2
+Dallas, Oklahoma City, 0, 2
+Dallas, Oklahoma City, 0, 2
+El Paso, Houston, 4, 6
+El Paso, Los Angeles, 8, 6
+El Paso, Oklahoma City, 3, 5
+El Paso, Phoenix, 0, 3
+El Paso, Santa Fe, 0, 2
+Little Rock, Oklahoma City, 0, 2
+Oklahoma City, Denver, 1, 4
+Oklahoma City, Kansas City, 0, 2
+Oklahoma City, Kansas City, 0, 2
+Denver, Kansas City, 8, 4
+Denver, Kansas City, 2, 4
+Denver, Phoenix, 7, 4
+Denver, Salt Lake City, 1, 3
+Denver, Salt Lake City, 3, 3
+Denver, Santa Fe, 0, 2
+Phoenix, Los Angeles, 8, 2
+Phoenix, Santa Fe, 0, 3
+Salt Lake City, Las Vegas, 2, 3
+Salt Lake City, Portland, 5, 6
+Salt Lake City, San Francisco, 2, 5
+Salt Lake City, San Francisco, 7, 5
+Los Angeles, Las Vegas, 0, 2
+Los Angeles, San Francisco, 6, 3
+Los Angeles, San Francisco, 3, 3
+San Francisco, Portland, 4, 5
+San Francisco, Portland, 6, 5

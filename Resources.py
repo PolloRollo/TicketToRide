@@ -27,7 +27,8 @@ class Resources:
         shuffle(self.deck)
 
     def draw_top(self):
-        # if deck > 0, otherwise shuffle discard
+        if len(self.deck) <= 0:
+            self.shuffle()
         return self.deck.pop(0)
 
     def draw_visible(self, n):
