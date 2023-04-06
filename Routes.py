@@ -1,12 +1,13 @@
 """
+The Routes class holds all the Desitination cards.
+
 """
 from random import shuffle
 
 
 class Routes:
-    def __init__(self):
-        self.main = 0
-        self.deck = []
+    def __init__(self, cards):
+        self.deck = cards
         self.discard = []
 
     def shuffle(self):
@@ -28,12 +29,12 @@ class Routes:
 
 class Destination:
     def __init__(self, A, B, points):
-        self.A = A
-        self.B = B
-        self.points = points
+        self.__A = A
+        self.__B = B
+        self.__points = points
 
     def get_points(self):
-        return self.points
+        return self.__points
 
     def get_destinations(self):
-        return (self.A, self.B)
+        return (self.__A, self.__B)

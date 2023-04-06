@@ -34,10 +34,10 @@ class Resources:
     def draw_visible(self, n):
         card = self.visible[n]
         self.visible[n] = self.draw_top()
-        self.three_wilds()
+        self.check_three_wilds()
         return card
 
-    def three_wilds(self):
+    def check_three_wilds(self):
         # if three wilds in visible
         wild_count = 0
         for i in self.visible:
@@ -45,12 +45,13 @@ class Resources:
                 wild_count += 1
         if wild_count >= 3:
             self.discard.extend(self.visible)
-            self.discard = []
+            self.visible = []
             self.place_visible()
 
     def place_visible(self):
         for i in range(5):
             self.visible.append(self.draw_top())
+        self.check_three_wilds()
 
     def return_cards(self, cards):
         self.discard.extend(cards)
