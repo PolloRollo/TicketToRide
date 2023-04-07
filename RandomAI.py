@@ -14,7 +14,7 @@ class RandomAI(Player):
             # draw destinations
             possible_actions.extend([(2, None)])
         possible_actions.extend(self.possible_resources(actions, face_up))
-        print(possible_actions)
+        # print(possible_actions)
         return choice(possible_actions)
 
     def possible_resources(self, actions, face_up):
@@ -31,6 +31,8 @@ class RandomAI(Player):
         possible_edges = []
         for route in self.routes:
             A, B = route.get_destinations()
+            A = self.node_map[A]
+            B = self.node_map[B]
             if nx.has_path(self.G, A, B):
                 print([p for p in nx.all_shortest_paths(self.G, source=A, target=B, weight='cost')])
         # (1, details)
