@@ -27,6 +27,9 @@ class Resources:
         shuffle(self.deck)
 
     def draw_top(self):
+        remaining_cards = len(self.deck) + len(self.discard)
+        if remaining_cards == 0:
+            return 9
         if len(self.deck) <= 0:
             self.shuffle()
         return self.deck.pop(0)

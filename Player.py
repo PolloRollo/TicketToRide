@@ -14,9 +14,6 @@ class Player:
         self.trains = 45
         self.G = None
 
-        self.desired_railroads = []
-        self.desired_resources = []
-
         self.node_map = {}
         self.edge_map = {}
         self.resource_count = {}
@@ -51,46 +48,52 @@ class Player:
 
     def check_can_buy(self, edge, desired_color):
         u, v, k, data = edge
-        A = self.node_map(u)
-        B = self.node_map(v)
+        color = self.G[u][v][k]['color']
+        cost = self.G[u][v][k]['cost']
         self.count_resources()
-        if data['color'] == 0: # Railroad can be paid by any color
-            if self.count_resources[desired_color] >= data['cost']:
-                return True, (data['cost'], 0)
-            elif self.count_resources[desired_color] + self.count_resources[0] >= data['cost']:
-                count = self.count_resources[desired_color]
-                return True, (count, data['cost'] - count)
-        elif data['color'] == desired_color: # Railroad can only be paid by same color
-            if self.count_resources[data['color']] >= data['cost']:
-                return True, (data['cost'], 0)
-            elif self.count_resources[data['color']] + self.count_resources[0] >= data['cost']:
-                count = self.count_resources[data['color']]
-                return True, (count, data['cost'] - count)
+        if color == 0: # Railroad can be paid by any color
+            if self.resource_count[desired_color] >= cost:
+                return (True, desired_color)
+            elif self.resource_count[desired_color] + self.resource_count[0] >= cost:
+                count = self.resource_count[desired_color]
+                return (True, desired_color)
+        elif color == desired_color: # Railroad can only be paid by same color
+            if self.resource_count[color] >= cost:
+                return (True, color)
+            elif self.resource_count[color] + self.resource_count[0] >= cost:
+                count = self.resource_count[color]
+                return (True, color)
         return False, None
 
-
     def buy_railroad(self, edge, desired_color, cost):
-        u, v, k, data = edge
-        color, wild = cost
-        A = self.node_map(u)
-        B = self.node_map(v)
+        u, v, k = edge
+        color = min(cost, self.resource_count[desired_color])
+        wild = cost - color
+        A = self.node_map[u]
+        B = self.node_map[v]
         discard = []
-        while color > 0:
-            i = self.resources.index(desired_color)
-            discard.append(self.resources.pop(i))
-        while wild > 0:
-            i = self.resources.index(0)
-            discard.append(self.resources.pop(i))
-        self.trains -= self.G[A][B][k]['cost']
+        if color > 0:
+            for i in range(color):
+                i = self.resources.index(desired_color)
+                discard.append(self.resources.pop(i))
+        if wild > 0:
+            for i in range(wild):
+                i = self.resources.index(0)
+                discard.append(self.resources.pop(i))
+
+        self.trains -= cost
         # Merge nodes A, B in self.G, this will help find shortest paths
         self.G = nx.contracted_nodes(self.G, A, B, self_loops=False)
-        self.node_map[v] = A
+
+        for key, val in self.node_map.items():
+            if val == B:
+                self.node_map[key] = A
         return discard
         
     def count_resources(self):
         self.resource_count = {i:0 for i in range(9)}
-        for resource in self.resources():
-            self.resoucre_count[resource] += 1
+        for resource in self.resources:
+            self.resource_count[resource] += 1
 
 
 

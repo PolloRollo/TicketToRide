@@ -16,7 +16,12 @@ class Routes:
         shuffle(self.deck)
 
     def draw(self):
-        return [self.draw_top() for _ in range(3)]
+        remaining_cards = len(self.deck) + len(self.discard)
+        if remaining_cards >= 3:
+            return [self.draw_top() for _ in range(3)]
+        else:
+            return [self.draw_top() for _ in range(remaining_cards)]
+
 
     def draw_top(self):
         if len(self.deck) <= 0:
