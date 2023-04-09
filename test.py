@@ -10,12 +10,13 @@ from Game import Game
 
 
 def test(n):
-    G = get_map("defaultMap.txt")
-    destinations = get_routes('defaultRoutes.txt')
-    routes = Routes(destinations)
-    resources = Resources()
-    # Next step, pass all into Game
-    game = Game(G, routes, resources)
+    for i in range(n):
+        G = get_map("defaultMap.txt")
+        destinations = get_routes('defaultRoutes.txt')
+        routes = Routes(destinations)
+        resources = Resources()
+        # Next step, pass all into Game
+        game = Game(G, routes, resources)
         
 
 def LFRBenchmark(n, tau1=2.5, tau2=1.5, average_degree=7.0, mu=.1, min_degree=None, max_degree=None, min_community=30, max_community=70):

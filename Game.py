@@ -25,7 +25,7 @@ class Game:
         # Begin game, take turns, test
         self.start_game()
         self.take_turns()
-        self.test()
+        # self.test()
 
     def start_game(self):
         """
@@ -71,7 +71,7 @@ class Game:
             return True
         if len(self.resources.deck) + len(self.resources.discard) <= 10:
             return True
-        if len(self.routes.deck) + len(self.routes.discard) <= 0:
+        if len(self.routes.deck) + len(self.routes.discard) <= 3:
             return True
         self.end -= 1
         return False
@@ -91,8 +91,8 @@ class Game:
                 elif action == 1: # build train
                     self.build_railroad(player, details)
                 elif action == 2: # take routes
-                    #self.draw_routes(player)
-                    print("draw")
+                    self.draw_routes(player)
+                    # print("draw")
             turn += 1
         print(self.score_game())
         return 0

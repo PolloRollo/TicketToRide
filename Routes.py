@@ -22,7 +22,6 @@ class Routes:
         else:
             return [self.draw_top() for _ in range(remaining_cards)]
 
-
     def draw_top(self):
         if len(self.deck) <= 0:
             self.shuffle()
