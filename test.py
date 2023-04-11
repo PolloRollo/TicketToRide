@@ -6,7 +6,8 @@ from Resources import Resources
 from Routes import Routes, Destination
 from Map import Map
 from Game import Game
-# from Player import Player
+from Player import Player
+from RandomAI import RandomAI
 
 
 def test(n):
@@ -15,9 +16,11 @@ def test(n):
         destinations = get_routes('defaultRoutes.txt')
         routes = Routes(destinations)
         resources = Resources()
+        players = [RandomAI() for _ in range(2)]
         # Next step, pass all into Game
-        game = Game(G, routes, resources)
-        
+        game = Game(G, routes, resources, players)
+        game.map.display_map()
+
 
 def LFRBenchmark(n, tau1=2.5, tau2=1.5, average_degree=7.0, mu=.1, min_degree=None, max_degree=None, min_community=30, max_community=70):
     """ !!! only min_degree XOR average_degree must be specified, otherwise a NetworkXError is raised. !!!
@@ -56,6 +59,7 @@ def get_routes(file):
         destinations.append(Destination(A, B, points))
     return destinations
 
+
 color_dict = {"Colors.none": 0,
               "Colors.red": 1,
               "Colors.orange": 2,
@@ -67,4 +71,4 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-test(25)
+test(1)

@@ -2,6 +2,8 @@
 
 
 """
+import networkx as nx
+import matplotlib.pyplot as plt
 from Resources import Resources
 from Routes import Routes
 from Map import Map
@@ -12,20 +14,21 @@ from random import shuffle
 
 
 class Game:
-    def __init__(self, G, routes, resources):
+    def __init__(self, G, routes, resources, players):
         # parameters: Map, Resources, Routes, Player_list
         self.resources = resources
         self.routes = routes
-        self.players = [RandomAI() for i in range(2)]
+        self.players = players
         self.map = Map(G, len(self.players))
+
+        # Game Constants
         self.actions = 2
         self.railroad_points = {0: 0, 1: 1, 2: 2, 3: 4, 4: 7, 5: 10, 6: 15}
-        self.end = 100
+        self.end = 1000
 
         # Begin game, take turns, test
         self.start_game()
         self.take_turns()
-        # self.test()
 
     def start_game(self):
         """
@@ -86,11 +89,11 @@ class Game:
 
             while self.actions > 0:
                 action, details = player.take_turn(self.actions, self.resources.visible)
-                if action == 0: # draw cards
+                if action == 0:  # draw cards
                     self.draw_cards(player, details)
-                elif action == 1: # build train
+                elif action == 1:  # build train
                     self.build_railroad(player, details)
-                elif action == 2: # take routes
+                elif action == 2:  # take routes
                     self.draw_routes(player)
                     # print("draw")
             turn += 1
@@ -114,12 +117,13 @@ class Game:
 
         discard = player.buy_railroad(edge, desired_color, cost)
         self.resources.discard.extend(discard)
-        self.map.G[u][v][k]['claimed_by'] = player.player_id
+        self.map.claim_edge(player, edge)
+        """self.map.G[u][v][k]['claimed_by'] = player.player_id
         if len(self.players) <= 3:
             if len(self.map.G[u][v]) > 1:
                 for extra, details in self.map.G[u][v].items():
                     if extra != k:
-                        self.map.G[u][v][extra]['claimed_by'] = -1
+                        self.map.G[u][v][extra]['claimed_by'] = -1"""
         self.actions -= 2
 
     def draw_routes(self, player, start=False):
@@ -142,11 +146,11 @@ class Game:
             for route in player.routes:
                 print(route.get_destinations(), route.get_points())
 
-    def print_log(self):
-        return 0
-
     def score_game(self):
-        return [self.score_player(player) for player in self.players]
+        scores = [self.score_player(player) for player in self.players]
+        # Longest train (lol this might be difficult)
+
+        return scores
 
     def score_player(self, player):
         score = 0
@@ -169,8 +173,6 @@ class Game:
                 score += route.get_points()
             else:
                 score -= route.get_points()
-
-        # Longest train (lol this might be difficult)
 
         return score
 

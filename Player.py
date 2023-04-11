@@ -50,6 +50,8 @@ class Player:
         u, v, k, data = edge
         color = self.G[u][v][k]['color']
         cost = self.G[u][v][k]['cost']
+        if cost >= self.trains:
+            return False, None
         self.count_resources()
         if color == 0: # Railroad can be paid by any color
             if self.resource_count[desired_color] >= cost:
