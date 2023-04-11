@@ -19,7 +19,7 @@ class RandomAI(Player):
 
     def possible_resources(self, actions, face_up):
         # What is it possible to draw?
-        choices = [(0, 5)]
+        choices = [(0, top) for top in range(5, 10)]
         if actions >= 2:
             choices.extend([(0, i) for i in range(5)])  # All face-up cards available
         else:

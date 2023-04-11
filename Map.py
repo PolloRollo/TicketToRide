@@ -14,8 +14,8 @@ class Map:
         # Functions
         self.label_all_unclaimed()
 
-    def all_edges(self):
-        return self.G.edges(data=True, keys=True)
+    def get_edges(self, data, keys):
+        return self.G.edges(data=data, keys=keys)
     
     def label_all_unclaimed(self):
         for u, v, k in self.G.edges(keys=True):

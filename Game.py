@@ -26,6 +26,8 @@ class Game:
         self.railroad_points = {0: 0, 1: 1, 2: 2, 3: 4, 4: 7, 5: 10, 6: 15}
         self.end = 1000
 
+        self.scores = []
+
         # Begin game, take turns, test
         self.start_game()
         self.take_turns()
@@ -43,10 +45,9 @@ class Game:
         # shuffle(self.players)
 
         self.deal_resources()
-        self.deal_routes(start=True)
-        self.resources.place_visible()
+        self.deal_routes()
+        self.resources.place_face_up()
         self.give_map_copy(self.map.G)
-        # print(self.map.all_edges())
 
     def set_player_id(self):
         for i in range(len(self.players)):
@@ -57,9 +58,9 @@ class Game:
             for player in self.players:
                 player.get_resource(self.resources.draw_top())
 
-    def deal_routes(self, start=False):
+    def deal_routes(self):
         for player in self.players:
-            self.draw_routes(player, start)
+            self.draw_routes(player, start=True)
 
     def give_map_copy(self, G):
         for player in self.players:
@@ -84,27 +85,28 @@ class Game:
         while not self.end_conditions():
             player = self.players[turn % len(self.players)]
             self.actions = 2
+            # Update player's map
             claimed_edges = self.map.G.edges(data='claimed_by', keys=True)
             player.remove_claimed_edges(claimed_edges)
 
             while self.actions > 0:
-                action, details = player.take_turn(self.actions, self.resources.visible)
-                if action == 0:  # draw cards
+                option, details = player.take_turn(self.actions, self.resources.face_up)
+                if option == 0:  # draw cards
                     self.draw_cards(player, details)
-                elif action == 1:  # build train
+                elif option == 1:  # build train
                     self.build_railroad(player, details)
-                elif action == 2:  # take routes
+                elif option == 2:  # take routes
                     self.draw_routes(player)
-                    # print("draw")
             turn += 1
-        print(self.score_game())
+            self.scores.append(self.score_game())
+        print(self.scores[-1])
         return 0
 
     def draw_cards(self, player, choice):
         if choice < 5:
-            if self.resources.visible[choice] == 0:
-                self.actions -= 1
-            player.get_resource(self.resources.draw_visible(choice))
+            if self.resources.face_up[choice] == 0:
+                self.actions -= 1  # Extra point deducted for taking wild
+            player.get_resource(self.resources.draw_face_up(choice))
         else:
             player.get_resource(self.resources.draw_top())
         self.actions -= 1
@@ -118,12 +120,6 @@ class Game:
         discard = player.buy_railroad(edge, desired_color, cost)
         self.resources.discard.extend(discard)
         self.map.claim_edge(player, edge)
-        """self.map.G[u][v][k]['claimed_by'] = player.player_id
-        if len(self.players) <= 3:
-            if len(self.map.G[u][v]) > 1:
-                for extra, details in self.map.G[u][v].items():
-                    if extra != k:
-                        self.map.G[u][v][extra]['claimed_by'] = -1"""
         self.actions -= 2
 
     def draw_routes(self, player, start=False):
@@ -132,19 +128,10 @@ class Game:
         discard = None
         if start:
             discard = player.choose_routes(min=2)
-            # decide on resources, maybe make two methods.
         else:
             discard = player.choose_routes()
         self.routes.return_cards(discard)
         self.actions -= 2
-
-    def test(self):
-        print(self.resources.visible)
-
-        for player in self.players:
-            print(player.resources)
-            for route in player.routes:
-                print(route.get_destinations(), route.get_points())
 
     def score_game(self):
         scores = [self.score_player(player) for player in self.players]
@@ -156,15 +143,11 @@ class Game:
         score = 0
 
         # Points per railroad built
-        player_edges = []
-        for edge in self.map.G.edges(data='claimed_by', keys=True):
-            if edge[3] is not None and edge[3] == player.player_id:
-                player_edges.append(edge)
-        for edge in player_edges:
+        for edge in self.map.get_edges(data='claimed_by', keys=True):
             u, v, k, claim = edge
-
-            cost = self.map.G[u][v][k]['cost']
-            score += self.railroad_points[cost]
+            if claim is not None and claim == player.player_id:
+                cost = self.map.G[u][v][k]['cost']
+                score += self.railroad_points[cost]
 
         # Points per route completed
         for route in player.routes:

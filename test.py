@@ -71,4 +71,4 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-test(1)
+test(25)
