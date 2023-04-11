@@ -3,6 +3,7 @@
 import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
+# import matplotlib.colormaps
 
 
 class Map:
@@ -55,11 +56,12 @@ class Map:
                    'Miami': [[.9, -.9]]}
         # fixed = ['Vancouver', 'Boston', 'Los Angeles', 'Miami']
         pos = nx.spring_layout(self.G, pos=corners)
-        # print(pos)
+        cmap = plt.cm.rainbow
+
         plt.figure(figsize=(11, 8))
         nx.draw_networkx(self.G, pos=pos, with_labels=True)
         nx.draw_networkx_edges(self.G, pos=pos, edgelist=unclaimed, width=1, style='-.')
-        nx.draw_networkx_edges(self.G, pos=pos, edgelist=claimed, edge_color=color_map, width=5)
+        nx.draw_networkx_edges(self.G, pos=pos, edgelist=claimed, edge_color=color_map, edge_cmap=cmap, width=5)
         plt.title('Ticket To Ride: America')
         plt.savefig("test_map.png", dpi=150)
         plt.show()
