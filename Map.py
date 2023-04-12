@@ -3,7 +3,6 @@
 import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
-# import matplotlib.colormaps
 
 
 class Map:
@@ -33,10 +32,12 @@ class Map:
                         self.G[u][v][extra]['claimed_by'] = -1
 
     def get_weight(self, edge):
-        return 0
+        u, v, k = edge
+        return self.G[u][v][k]['cost']
 
     def get_color(self, edge):
-        return 0
+        u, v, k = edge
+        return self.G[u][v][k]['color']
 
     def display_map(self):
         claimed = []
@@ -58,8 +59,15 @@ class Map:
         pos = nx.spring_layout(self.G, pos=corners)
         cmap = plt.cm.rainbow
 
+        # curved_edges = [edge for edge in self.G.edges(keys=True) if len(self.G[edge[0]][edge[1]]) > 1]
+        # straight_edges = list(set(self.G.edges(keys=True)) - set(curved_edges))
+        # print(curved_edges)
+        # print(straight_edges)
         plt.figure(figsize=(11, 8))
         nx.draw_networkx(self.G, pos=pos, with_labels=True)
+        # nx.draw_networkx_edges(self.G, pos, edgelist=straight_edges)
+        # arc_rad = .1
+        # nx.draw_networkx_edges(self.G, pos, edgelist=curved_edges, connectionstyle=f'arc3, rad = {arc_rad}', width=5)
         nx.draw_networkx_edges(self.G, pos=pos, edgelist=unclaimed, width=1, style='-.')
         nx.draw_networkx_edges(self.G, pos=pos, edgelist=claimed, edge_color=color_map, edge_cmap=cmap, width=5)
         plt.title('Ticket To Ride: America')

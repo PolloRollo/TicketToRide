@@ -11,7 +11,7 @@ import os
 
 
 def main(n):
-    for i in range(n):
+    for trial in range(n):
         G = get_map("defaultMap.txt")
         destinations = get_routes('defaultRoutes.txt')
         routes = Routes(destinations)
@@ -20,5 +20,6 @@ def main(n):
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         game.map.display_map()
+
 
 main(3)
