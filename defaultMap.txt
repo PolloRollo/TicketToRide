@@ -4,15 +4,20 @@ Atlanta, Nashville, 0, 1
 Atlanta, New Orleans, 2, 4
 Atlanta, New Orleans, 3, 4
 Atlanta, Raleigh, 0, 2
+Atlanta, Raleigh, 0, 2
 Charleston, Miami, 6, 4
 Charleston, Raleigh, 0, 1
 Miami, New Orleans, 1, 6
 Nashville, Little Rock, 7, 3
 Nashville, Pittsburgh, 3, 4
+Pittsburgh, Raleigh, 0, 2
+Pittsburgh, Washington DC, 0, 2
+Pittsburgh, Toronto, 0, 2
 Nashville, Raleigh, 8, 3
 Nashville, Saint Louis, 0, 2
 New Orleans, Houston, 0, 2
 New Orleans, Little Rock, 4, 3
+Raleigh, Washington DC, 0, 2
 Raleigh, Washington DC, 0, 2
 Boston, Montreal, 0, 2
 Boston, Montreal, 0, 2
@@ -26,7 +31,6 @@ New York, Pittsburgh, 7, 2
 New York, Washington DC, 8, 2
 New York, Washington DC, 2, 2
 Calgary, Helena, 0, 4
-Calgary, Helena, 0, 4
 Calgary, Seattle, 0, 4
 Calgary, Vancouver, 0, 3
 Calgary, Winnipeg, 7, 6
@@ -37,6 +41,7 @@ Helena, Seattle, 3, 6
 Helena, Winnipeg, 5, 4
 Seattle, Portland, 0, 1
 Seattle, Portland, 0, 1
+Seattle, Vancouver, 0, 1
 Seattle, Vancouver, 0, 1
 Winnipeg, Duluth, 8, 4
 Winnipeg, Sault St. Marie, 0, 6
@@ -82,10 +87,12 @@ Denver, Salt Lake City, 3, 3
 Denver, Santa Fe, 0, 2
 Phoenix, Los Angeles, 8, 2
 Phoenix, Santa Fe, 0, 3
+Oklahoma City, Santa Fe, 5, 3
 Salt Lake City, Las Vegas, 2, 3
 Salt Lake City, Portland, 5, 6
 Salt Lake City, San Francisco, 2, 5
 Salt Lake City, San Francisco, 7, 5
+Salt Lake City, Helena, 6, 3
 Los Angeles, Las Vegas, 0, 2
 Los Angeles, San Francisco, 6, 3
 Los Angeles, San Francisco, 3, 3
