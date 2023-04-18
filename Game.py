@@ -100,7 +100,7 @@ class Game:
             turn += 1
             self.scores.append(self.score_game())
         print(self.scores[-1])
-        print(turn)
+        # print(turn)
         return 0
 
     def draw_cards(self, player, choice):
@@ -135,10 +135,10 @@ class Game:
         self.actions -= 2
 
     def score_game(self):
-        scores = [self.score_player(player) for player in self.players]
+        score = [self.score_player(player) for player in self.players]
         # Longest train (lol this might be difficult)
 
-        return scores
+        return score
 
     def score_player(self, player):
         score = 0
@@ -160,3 +160,15 @@ class Game:
 
         return score
 
+    def plot_scores(self, title):
+        score_by_player = [[] for p in self.players]
+        for time in range(len(self.scores)):
+            for player in self.players:
+                score_by_player[player.player_id].append(self.scores[time][player.player_id])
+        plt.title(title)
+        for player in self.players:
+            plt.plot(score_by_player[player.player_id], label=str(type(player)) + str(player.player_id))
+        plt.xlabel("Turn")
+        plt.ylabel("Score")
+        plt.legend()
+        plt.show()

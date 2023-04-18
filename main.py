@@ -1,4 +1,4 @@
-from Routes import Routes, Destination
+from Routes import Routes, Ticket
 from Resources import Resources
 from Map import Map
 from Game import Game
@@ -8,19 +8,20 @@ import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
 import os
-from test import get_map, get_routes
+from test import get_map, get_tickets
 
 
 def main(n):
     for trial in range(n):
         G = get_map("defaultMap.txt")
-        destinations = get_routes('defaultRoutes.txt')
-        routes = Routes(destinations)
+        tickets = get_tickets('defaultTickets.txt')
+        routes = Routes(tickets)
         resources = Resources()
         players = [RandomAI() for _ in range(2)]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         game.map.display_map()
+        game.plot_scores("Scores")
 
 
 main(1)
