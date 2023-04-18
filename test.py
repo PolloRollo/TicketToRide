@@ -16,7 +16,7 @@ def test(n):
         destinations = get_routes('defaultRoutes.txt')
         routes = Routes(destinations)
         resources = Resources()
-        players = [RandomAI() for _ in range(3)]
+        players = [RandomAI() for _ in range(2)]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         game.map.display_map()

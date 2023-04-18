@@ -100,6 +100,7 @@ class Game:
             turn += 1
             self.scores.append(self.score_game())
         print(self.scores[-1])
+        print(turn)
         return 0
 
     def draw_cards(self, player, choice):

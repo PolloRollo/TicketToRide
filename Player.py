@@ -55,16 +55,16 @@ class Player:
         self.count_resources()
         if color == 0: # Railroad can be paid by any color
             if self.resource_count[desired_color] >= cost:
-                return (True, desired_color)
+                return True, desired_color
             elif self.resource_count[desired_color] + self.resource_count[0] >= cost:
                 count = self.resource_count[desired_color]
-                return (True, desired_color)
+                return True, desired_color
         elif color == desired_color: # Railroad can only be paid by same color
             if self.resource_count[color] >= cost:
-                return (True, color)
+                return True, color
             elif self.resource_count[color] + self.resource_count[0] >= cost:
                 count = self.resource_count[color]
-                return (True, color)
+                return True, color
         return False, None
 
     def buy_railroad(self, edge, desired_color, cost):
@@ -93,7 +93,7 @@ class Player:
         return discard
         
     def count_resources(self):
-        self.resource_count = {i:0 for i in range(9)}
+        self.resource_count = {i: 0 for i in range(9)}
         for resource in self.resources:
             self.resource_count[resource] += 1
 

@@ -8,6 +8,7 @@ import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
 import os
+from test import get_map, get_routes
 
 
 def main(n):
@@ -22,4 +23,4 @@ def main(n):
         game.map.display_map()
 
 
-main(3)
+main(1)

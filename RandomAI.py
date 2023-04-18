@@ -6,6 +6,9 @@ from Player import Player
 
 
 class RandomAI(Player):
+    def __init__(self):
+        super().__init__()
+
     def take_turn(self, actions, face_up):
         possible_actions = []
         if actions >= 2:
