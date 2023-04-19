@@ -3,6 +3,8 @@
 import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
+import matplotlib as mpl
+from matplotlib.lines import Line2D
 
 
 class Map:
@@ -42,35 +44,51 @@ class Map:
     def display_map(self):
         claimed = []
         unclaimed = []
+        _c = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple']
+        # matplotlib.colors.TABLEAU_COLORS to match score colors
+        clrs = {i: _c[i] for i in range(self.player_count)}
         color_map = []
         
         for u, v, k, d in self.G.edges(keys=True, data='claimed_by'):
             if d is None or d == -1:
                 unclaimed.append((u, v, k))
             else:
-                color_map.append(d)
+                color_map.append(clrs[d])
                 claimed.append((u, v, k))
 
         corners = {'Vancouver': [[-.9, .9]],
                    'Boston': [[.9, .9]],
                    'Los Angeles': [[-.9, -.9]],
                    'Miami': [[.9, -.9]]}
-        # fixed = ['Vancouver', 'Boston', 'Los Angeles', 'Miami']
         pos = nx.spring_layout(self.G, pos=corners)
-        cmap = plt.cm.rainbow
 
+        # DRAWING PARALLEL EDGES STILL BROKEN
         # curved_edges = [edge for edge in self.G.edges(keys=True) if len(self.G[edge[0]][edge[1]]) > 1]
         # straight_edges = list(set(self.G.edges(keys=True)) - set(curved_edges))
         # print(curved_edges)
         # print(straight_edges)
         plt.figure(figsize=(11, 8))
-        nx.draw_networkx(self.G, pos=pos, with_labels=True)
+        # fig, ax = plt.subplots()
+        nx.draw_networkx(self.G, pos=pos, with_labels=True, node_color='w')
         # nx.draw_networkx_edges(self.G, pos, edgelist=straight_edges)
         # arc_rad = .1
         # nx.draw_networkx_edges(self.G, pos, edgelist=curved_edges, connectionstyle=f'arc3, rad = {arc_rad}', width=5)
         nx.draw_networkx_edges(self.G, pos=pos, edgelist=unclaimed, width=1, style='-.')
-        nx.draw_networkx_edges(self.G, pos=pos, edgelist=claimed, edge_color=color_map, edge_cmap=cmap, width=5)
+        h = nx.draw_networkx_edges(self.G, pos=pos, edgelist=claimed, edge_color=color_map, width=5)
         plt.title('Ticket To Ride: America')
+
+        # https://stackoverflow.com/a/48136768
+        # https://stackoverflow.com/questions/19877666/add-legends-to-linecollection-plot
+        # - uses plotted data to define the color but here we already have colors defined, so just need a Line2D object.
+        def make_proxy(clr, mappable, **kwargs):
+            return Line2D([0, 1], [0, 1], color=clr, **kwargs)
+
+        # generate proxies with the above function
+        proxies = [make_proxy(clr, h, lw=5) for num, clr in clrs.items()]
+        # and some text for the legend -- you should use something from df.
+        labels = ["{}".format(i) for i in range(self.player_count)]
+        plt.legend(proxies, labels)
+
         plt.savefig("test_map.png", dpi=150)
         plt.show()
 

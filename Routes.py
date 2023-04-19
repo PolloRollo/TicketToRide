@@ -31,7 +31,7 @@ class Routes:
         self.discard.extend(cards)
 
 
-class Destination:
+class Ticket:
     def __init__(self, A, B, points):
         self.__A = A
         self.__B = B
@@ -41,4 +41,4 @@ class Destination:
         return self.__points
 
     def get_destinations(self):
-        return (self.__A, self.__B)
+        return self.__A, self.__B

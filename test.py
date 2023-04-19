@@ -3,7 +3,7 @@ from math import log
 import matplotlib.pyplot as plt
 import os
 from Resources import Resources
-from Routes import Routes, Destination
+from Routes import Routes, Ticket
 from Map import Map
 from Game import Game
 from Player import Player
@@ -13,13 +13,14 @@ from RandomAI import RandomAI
 def test(n):
     for i in range(n):
         G = get_map("defaultMap.txt")
-        destinations = get_routes('defaultRoutes.txt')
-        routes = Routes(destinations)
+        tickets = get_tickets('defaultTickets.txt')
+        routes = Routes(tickets)
         resources = Resources()
         players = [RandomAI() for _ in range(3)]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         game.map.display_map()
+        game.plot_scores("Scores")
 
 
 def LFRBenchmark(n, tau1=2.5, tau2=1.5, average_degree=7.0, mu=.1, min_degree=None, max_degree=None, min_community=30, max_community=70):
@@ -48,16 +49,16 @@ def get_map(file):
     return G
 
 
-def get_routes(file):
+def get_tickets(file):
     if not os.access(file, 0):
         print("Error: Failed to access file")
     f = open(file, 'r')
-    destinations = []
+    tickets = []
     for line in f:
         A, B, points = line.split(', ')
         points = int(points)
-        destinations.append(Destination(A, B, points))
-    return destinations
+        tickets.append(Ticket(A, B, points))
+    return tickets
 
 
 color_dict = {"Colors.none": 0,
@@ -71,4 +72,4 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-test(0)
+# test(1)
