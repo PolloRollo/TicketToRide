@@ -8,7 +8,7 @@ from TrentonAI import TrentonAI
 import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
-from test import get_map, get_routes
+from test import get_map
 import os
 from test import get_map, get_tickets
 
