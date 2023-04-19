@@ -4,9 +4,11 @@ from Map import Map
 from Game import Game
 from Player import Player
 from RandomAI import RandomAI
+from TrentonAI import TrentonAI
 import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
+from test import get_map, get_routes
 import os
 
 
@@ -16,10 +18,10 @@ def main(n):
         destinations = get_routes('defaultRoutes.txt')
         routes = Routes(destinations)
         resources = Resources()
-        players = [RandomAI() for _ in range(2)]
+        players = [RandomAI(), RandomAI(), TrentonAI()]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         game.map.display_map()
 
 
-main(3)
+main(1)
