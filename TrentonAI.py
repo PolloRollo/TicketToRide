@@ -15,8 +15,8 @@ class TrentonAI(Player):
             possible_actions.extend([(2, None)])
         possible_actions.extend(self.possible_resources(actions, face_up))
         # print(possible_actions)
-        print("=======")
-        print(possible_actions)
+        # print("=======")
+        # print(possible_actions)
         return choice(possible_actions)
 
     def possible_resources(self, actions, face_up):
