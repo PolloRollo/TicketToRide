@@ -10,17 +10,22 @@ from Player import Player
 from RandomAI import RandomAI
 
 
-def test(n):
+def test(n, plots=False):
+    scores = []
     for i in range(n):
         G = get_map("defaultMap.txt")
         tickets = get_tickets('defaultTickets.txt')
         routes = Routes(tickets)
         resources = Resources()
-        players = [RandomAI() for _ in range(3)]
+        players = [RandomAI() for _ in range(2)]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
-        game.map.display_map()
-        game.plot_scores("Scores")
+        if plots:
+            game.map.display_map()
+            game.plot_scores("Scores")
+        scores.append(game.scores[-1])
+    # print(scores)
+    # plot_histogram(scores)
 
 
 def LFRBenchmark(n, tau1=2.5, tau2=1.5, average_degree=7.0, mu=.1, min_degree=None, max_degree=None, min_community=30, max_community=70):
@@ -61,6 +66,18 @@ def get_tickets(file):
     return tickets
 
 
+def plot_histogram(scores):
+    # This is a good way to compare the performance of different agents
+    plt.title("Scores")
+    for player in range(len(scores[0])):
+        player_score = [scores[i][player] for i in range(len(scores))]
+        plt.hist(player_score, bins=20, histtype='step')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    # plt.legend()
+    plt.show()
+
+
 color_dict = {"Colors.none": 0,
               "Colors.red": 1,
               "Colors.orange": 2,
@@ -72,4 +89,4 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-# test(1)
+test(1, True)

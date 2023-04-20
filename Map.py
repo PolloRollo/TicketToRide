@@ -56,11 +56,12 @@ class Map:
                 color_map.append(clrs[d])
                 claimed.append((u, v, k))
 
-        corners = {'Vancouver': [[-.9, .9]],
-                   'Boston': [[.9, .9]],
-                   'Los Angeles': [[-.9, -.9]],
-                   'Miami': [[.9, -.9]]}
-        pos = nx.spring_layout(self.G, pos=corners)
+        corners = {'Vancouver': (-.9, .9),
+                   'Boston': (.9, .9),
+                   'Los Angeles': (-.9, -.9),
+                   'Miami': (.9, -.9),
+                   'Las Vegas': (-.8, -.7)}
+        pos = nx.spring_layout(self.G, pos=corners, fixed=corners.keys())
 
         # DRAWING PARALLEL EDGES STILL BROKEN
         # curved_edges = [edge for edge in self.G.edges(keys=True) if len(self.G[edge[0]][edge[1]]) > 1]

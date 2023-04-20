@@ -99,7 +99,7 @@ class Game:
                     self.draw_routes(player)
             turn += 1
             self.scores.append(self.score_game())
-        print(self.scores[-1])
+        # print(self.scores[-1])
         # print(turn)
         return 0
 
