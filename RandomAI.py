@@ -1,4 +1,6 @@
 """
+RandomAI extends the player class, with a heuristic to arbitrarily choose
+any possible move. The functions below help enumerate all possible actions.
 """
 from random import randint, choice
 import networkx as nx
@@ -79,6 +81,5 @@ class RandomAI(Player):
         for i in range(min):
             chosen_route = randint(0, len(self.temp_routes) - 1)
             self.routes.append(self.temp_routes.pop(chosen_route))
-        discard = [route for route in self.temp_routes]
-        self.temp_routes = []
+        discard = [self.temp_routes.pop(route) for route in range(len(self.temp_routes)-1, -1, -1)]
         return discard

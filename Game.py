@@ -41,13 +41,12 @@ class Game:
         self.resources.shuffle()
         self.routes.shuffle()
         self.set_player_id()
+        self.give_map_copy(self.map.G)
 
         # shuffle(self.players)
-
         self.deal_resources()
         self.deal_routes()
         self.resources.place_face_up()
-        self.give_map_copy(self.map.G)
 
     def set_player_id(self):
         for i in range(len(self.players)):
@@ -161,14 +160,16 @@ class Game:
         return score
 
     def plot_scores(self, title):
-        score_by_player = [[] for p in self.players]
-        for time in range(len(self.scores)):
-            for player in self.players:
-                score_by_player[player.player_id].append(self.scores[time][player.player_id])
+        score_by_player = []
+        for player in self.players:
+            score_by_player.append([time[player.player_id] for time in self.scores])
+        """ for time in self.scores:
+            score_by_player.append([time[player.player_id] for player in self.players])"""
         plt.title(title)
         for player in self.players:
             plt.plot(score_by_player[player.player_id], label=str(type(player)) + str(player.player_id))
         plt.xlabel("Turn")
         plt.ylabel("Score")
-        plt.legend()
+        plt.legend(loc='upper right')
         plt.show()
+

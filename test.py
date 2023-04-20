@@ -8,6 +8,7 @@ from Map import Map
 from Game import Game
 from Player import Player
 from RandomAI import RandomAI
+from RolloAI import RolloAI
 
 
 def test(n, plots=False):
@@ -17,15 +18,18 @@ def test(n, plots=False):
         tickets = get_tickets('defaultTickets.txt')
         routes = Routes(tickets)
         resources = Resources()
-        players = [RandomAI() for _ in range(2)]
+        players = [RandomAI(), RolloAI()]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         if plots:
             game.map.display_map()
             game.plot_scores("Scores")
+            for player in game.players:
+                print(player.resources)
         scores.append(game.scores[-1])
-    # print(scores)
-    # plot_histogram(scores)
+    if n >= 10:
+        plot_histogram(scores)
+        plot_score_difference(scores)
 
 
 def LFRBenchmark(n, tau1=2.5, tau2=1.5, average_degree=7.0, mu=.1, min_degree=None, max_degree=None, min_community=30, max_community=70):
@@ -74,7 +78,18 @@ def plot_histogram(scores):
         plt.hist(player_score, bins=20, histtype='step')
     plt.xlabel('Value')
     plt.ylabel('Frequency')
-    # plt.legend()
+    plt.show()
+
+
+def plot_score_difference(scores):
+    # Designed for two player games, will only compare player 0 and 1
+    score_dif = []
+    for time in scores:
+        score_dif.append(time[1] - time[0])
+    plt.title("Score difference: Player 1 - Player 0")
+    plt.hist(score_dif, bins=20, histtype='step')
+    plt.xlabel("Turn")
+    plt.ylabel("Score")
     plt.show()
 
 
@@ -89,4 +104,5 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-test(1, True)
+# test(2, True)
+test(200, False)
