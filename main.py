@@ -5,6 +5,7 @@ from Game import Game
 from Player import Player
 from RandomAI import RandomAI
 from TrentonAI import TrentonAI
+from BelnapAI import BelnapAI
 import networkx as nx
 from math import log
 import matplotlib.pyplot as plt
@@ -19,7 +20,7 @@ def main(n):
         tickets = get_tickets('defaultTickets.txt')
         routes = Routes(tickets)
         resources = Resources()
-        players = [RandomAI(), RandomAI(), TrentonAI()]
+        players = [RandomAI(), RandomAI(), TrentonAI(), BelnapAI()]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         game.map.display_map()
