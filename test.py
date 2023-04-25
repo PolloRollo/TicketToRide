@@ -1,14 +1,15 @@
 import networkx as nx
-from math import log
+# from math import log
 import matplotlib.pyplot as plt
 import os
 from Resources import Resources
 from Routes import Routes, Ticket
-from Map import Map
+# from Map import Map
 from Game import Game
 from Player import Player
 from RandomAI import RandomAI
 from RolloAI import RolloAI
+from BelnapAI import BelnapAI
 
 
 def test(n, plots=False):
@@ -18,7 +19,7 @@ def test(n, plots=False):
         tickets = get_tickets('defaultTickets.txt')
         routes = Routes(tickets)
         resources = Resources()
-        players = [RandomAI(), RolloAI()]
+        players = [RolloAI(), RolloAI()]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         if plots:
@@ -104,5 +105,5 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-# test(2, True)
-test(200, False)
+test(2, True)
+# test(200, False)
