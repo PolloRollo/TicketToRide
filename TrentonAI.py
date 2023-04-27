@@ -39,8 +39,9 @@ class TrentonAI(Player):
             # print(action)
             # print(map.get_weight(action[1][0]))
             # logic goes here
-            maxAction = action
-            maxPoints = 0
+            if(railroad_points[map.get_weight(action[1][0])] > maxPoints):
+                maxAction = action
+                maxPoints = railroad_points[map.get_weight(action[1][0])]
         if(maxPoints == 0):
             return 0, 0
         return maxAction, maxPoints
