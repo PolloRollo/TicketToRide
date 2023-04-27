@@ -1,13 +1,13 @@
 """
-This AI was made to employ no randomness, 
-if given the same circumstances, it should act the same every time
+Minor improvements to RandomAI
+
 """
 from random import randint, choice
 import networkx as nx
 from Player import Player
 
 
-class deterministicAI(Player):
+class NetworkAI(Player):
     def __init__(self):
         super().__init__()
         self.desired_resources = {}
@@ -16,18 +16,14 @@ class deterministicAI(Player):
         possible_actions = []
         self.count_resources()
         self.count_desired_resources()
-        possible_buys = self.possible_resources(actions, face_up)
         if actions >= 2:
             if self.are_routes_finished():
                 return 2, None  # Draw more routes
-            elif len(possible_buys) > 0:
-                possible_actions = self.possible_railroads()  # build railroads
             else:
-                possible_actions = self.possible_resources(actions, face_up)
-        else:
-            possible_actions = self.possible_resources(actions, face_up)
-        print(possible_actions)
-        return possible_actions[0]
+                possible_actions.extend(self.possible_railroads())  # build railroads
+        possible_actions.extend(self.possible_resources(actions, face_up))
+        # print(possible_actions)
+        return choice(possible_actions)
 
     def possible_resources(self, actions, face_up):
         # What is it possible to draw?
@@ -87,9 +83,29 @@ class deterministicAI(Player):
         self.resources.append(resource)
 
     def choose_routes(self, min=1):
+        """According to Witter et al., longer routes are overvalued
+        We will exploit this in choosing routes."""
+        combos = [[0, 1], [0, 2], [1, 2], [0, 1, 2]]
+        if min < 2:
+            combos.extend([[0], [1], [2]])
+        best_combo = None
+        best_score = 0
+        for combo in combos:
+            print(combo)
+            
         for i in range(min):
-            chosen_route = randint(0, len(self.temp_routes) - 1)
-            self.routes.append(self.temp_routes.pop(chosen_route))
+            points = []
+            for route in self.temp_routes:
+                A, B = route.get_destinations()
+                u = self.node_map[A]
+                v = self.node_map[B]
+                if nx.has_path(self.G, u, v):
+                    points.append(route.get_points())
+            max_points = max(points)
+            for route in range(len(self.temp_routes)):
+                if self.temp_routes[route].get_points() == max_points:
+                    self.routes.append(self.temp_routes.pop(route))
+                    break
         discard = [self.temp_routes.pop(route) for route in range(len(self.temp_routes)-1, -1, -1)]
         return discard
 
@@ -106,4 +122,3 @@ class deterministicAI(Player):
                 u, v, k, cost = railroad
                 self.desired_resources[self.G[u][v][k]['color']] += cost
         self.desired_resources[0] = 0
-        # print("desired", self.desired_resources)

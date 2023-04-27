@@ -10,6 +10,7 @@ from Player import Player
 from RandomAI import RandomAI
 from RolloAI import RolloAI
 from BelnapAI import BelnapAI
+from deterministicAI import deterministicAI
 
 
 def test(n, plots=False):
@@ -19,7 +20,7 @@ def test(n, plots=False):
         tickets = get_tickets('defaultTickets.txt')
         routes = Routes(tickets)
         resources = Resources()
-        players = [RolloAI(), RolloAI()]
+        players = [RolloAI(), BelnapAI()]
         # Next step, pass all into Game
         game = Game(G, routes, resources, players)
         if plots:
@@ -105,5 +106,5 @@ color_dict = {"Colors.none": 0,
               "Colors.black": 8}
 
 
-test(2, True)
-# test(200, False)
+# test(2, True)
+test(200, False)
