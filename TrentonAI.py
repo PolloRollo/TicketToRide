@@ -3,21 +3,47 @@
 from random import randint, choice
 import networkx as nx
 from Player import Player
+from Map import Map
+from test import get_map
+
+railroad_points = {0: 0, 1: 1, 2: 2, 3: 4, 4: 7, 5: 10, 6: 15}
 
 
 class TrentonAI(Player):
+    def __init__(self):
+        super().__init__()
+
     def take_turn(self, actions, face_up):
         possible_actions = []
+        potential_buys = self.possible_railroads()
+        maxPoints = 0
         if actions >= 2:
             # build railroad
-            possible_actions.extend(self.possible_railroads())
+            if len(potential_buys) > 0:
+                possible_actions.extend(potential_buys)
+                maxAction, maxPoints = self.maxEstimatedPoints(possible_actions)
+                # print(possible_actions)
             # draw destinations
-            possible_actions.extend([(2, None)])
+            #possible_actions.extend([(2, None)])
         possible_actions.extend(self.possible_resources(actions, face_up))
-        # print(possible_actions)
-        # print("=======")
-        # print(possible_actions)
-        return choice(possible_actions)
+        if(maxPoints == 0):
+            return choice(possible_actions)
+        return maxAction
+    
+    def maxEstimatedPoints(self, actionList):
+        G = get_map("defaultMap.txt")
+        maxPoints = 0
+        maxAction = None
+        map = Map(G, 4)
+        for action in actionList:
+            # print(action)
+            # print(map.get_weight(action[1][0]))
+            # logic goes here
+            maxAction = action
+            maxPoints = 0
+        if(maxPoints == 0):
+            return 0, 0
+        return maxAction, maxPoints
 
     def possible_resources(self, actions, face_up):
         # What is it possible to draw?
@@ -57,7 +83,6 @@ class TrentonAI(Player):
         buyable_railroads = []
         for edge in edges:
             u, v, k, cost = edge
-
             if self.G[u][v][k]['color'] != 0:
                 buyable, desired_color = self.check_can_buy(edge, self.G[u][v][k]['color'])
                 if buyable:
