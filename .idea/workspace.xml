@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3d6d209-a42c-49b7-88d3-0eb1e51218d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/NetworkAI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bots/Bots.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deterministicAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/deterministicAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BelnapAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/BelnapAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NetworkAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/NetworkAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RandomAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/RandomAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RolloAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/RolloAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrentonAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/TrentonAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deterministicAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bots/DeterministicAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +58,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Bots" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -114,7 +127,7 @@
       <workItem from="1681239151263" duration="39534000" />
       <workItem from="1682092984502" duration="818000" />
       <workItem from="1682539045516" duration="617000" />
-      <workItem from="1682550531037" duration="686000" />
+      <workItem from="1682550531037" duration="3421000" />
     </task>
     <servers />
   </component>
@@ -125,7 +138,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/RolloAI.py</url>
+          <url>file://$PROJECT_DIR$/Bots/RolloAI.py</url>
           <line>72</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
@@ -133,7 +146,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TicketToRide$main.coverage" NAME="main Coverage Results" MODIFIED="1681846142902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TicketToRide$test.coverage" NAME="test Coverage Results" MODIFIED="1682550666951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TicketToRide$main.coverage" NAME="main Coverage Results" MODIFIED="1682714209249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TicketToRide$test.coverage" NAME="test Coverage Results" MODIFIED="1682713952331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

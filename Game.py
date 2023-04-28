@@ -2,15 +2,10 @@
 
 
 """
-import networkx as nx
+
 import matplotlib.pyplot as plt
-from Resources import Resources
-from Routes import Routes
 from Map import Map
-from Player import Player
-from RandomAI import RandomAI
 import copy
-from random import shuffle
 
 
 class Game:

@@ -3,32 +3,17 @@
 Designing decision-making agents to play Ticket to Ride.
 
 --------
+Main.py is ready to run an example of our program.
 
 ### Game Environment
 
-- Initializes a board, shuffled resource deck, and shuffled route deck
-- Initialize players
-- Deal initial resources and routes
-- Alternate between players
+- Initializes a 
+    - Map (network)
+    - Resource deck (shuffled)
+    - Route deck (shuffled)
+- Initialize players, deals initial resources and routes
+- Alternate between players taking turns
 - Check end game conditions
-
-### Map
-
-- Graph initialized unclaimed, all roads weighted by length and color
-- Graph updated when road claimed
-
-
-
-### Resource Deck
-
-- Initialize resource deck, shuffle
-- Set out 5 cards
-- Check for card reset
-
-### Route Deck
-
-- Initialize route deck, shuffle
-
 
 ### Player
 
@@ -39,9 +24,4 @@ Designing decision-making agents to play Ticket to Ride.
 
 - Decide between which resources
 - Decide between which roads to build
--
 
-
-
-Are players inside game
-or do players interact with game

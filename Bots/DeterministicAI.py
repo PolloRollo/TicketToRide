@@ -7,7 +7,7 @@ import networkx as nx
 from Player import Player
 
 
-class deterministicAI(Player):
+class DeterministicAI(Player):
     def __init__(self):
         super().__init__()
         self.desired_resources = {}

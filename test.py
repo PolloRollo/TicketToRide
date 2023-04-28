@@ -1,37 +1,15 @@
 import networkx as nx
-# from math import log
 import matplotlib.pyplot as plt
 import os
 from Resources import Resources
 from Routes import Routes, Ticket
 # from Map import Map
 from Game import Game
-from Player import Player
-from RandomAI import RandomAI
-from RolloAI import RolloAI
-from BelnapAI import BelnapAI
-from deterministicAI import deterministicAI
-
-
-def test(n, plots=False):
-    scores = []
-    for i in range(n):
-        G = get_map("defaultMap.txt")
-        tickets = get_tickets('defaultTickets.txt')
-        routes = Routes(tickets)
-        resources = Resources()
-        players = [RolloAI(), BelnapAI()]
-        # Next step, pass all into Game
-        game = Game(G, routes, resources, players)
-        if plots:
-            game.map.display_map()
-            game.plot_scores("Scores")
-            # for player in game.players:
-                # print(player.resources)
-        scores.append(game.scores[-1])
-    if n >= 10:
-        plot_histogram(scores)
-        plot_score_difference(scores)
+from Bots.RandomAI import RandomAI
+from Bots.RolloAI import RolloAI
+# from Bots.BelnapAI import BelnapAI
+# from Bots.DeterministicAI import DeterministicAI
+# from Bots.TrentonAI import TrentonAI
 
 
 def LFRBenchmark(n, tau1=2.5, tau2=1.5, average_degree=7.0, mu=.1, min_degree=None, max_degree=None, min_community=30, max_community=70):
@@ -104,11 +82,3 @@ color_dict = {"Colors.none": 0,
               "Colors.pink": 6,
               "Colors.white": 7,
               "Colors.black": 8}
-
-
-# test(2, True)
-<<<<<<< HEAD
-test(200, False)
-=======
-# test(200, False)
->>>>>>> refs/remotes/TicketToRide/main
