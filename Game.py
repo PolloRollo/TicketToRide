@@ -165,6 +165,6 @@ class Game:
             plt.plot(score_by_player[player.player_id], label=str(type(player)) + str(player.player_id))
         plt.xlabel("Turn")
         plt.ylabel("Score")
-        plt.legend(loc='upper right')
+        plt.legend(loc='upper left')
         plt.show()
 
