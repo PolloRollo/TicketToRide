@@ -26,8 +26,8 @@ def test(n, plots=False):
         if plots:
             game.map.display_map()
             game.plot_scores("Scores")
-            for player in game.players:
-                print(player.resources)
+            # for player in game.players:
+                # print(player.resources)
         scores.append(game.scores[-1])
     if n >= 10:
         plot_histogram(scores)
@@ -107,4 +107,8 @@ color_dict = {"Colors.none": 0,
 
 
 # test(2, True)
+<<<<<<< HEAD
 test(200, False)
+=======
+# test(200, False)
+>>>>>>> refs/remotes/TicketToRide/main
